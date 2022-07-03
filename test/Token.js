@@ -19,5 +19,10 @@ describe("Token Contract", function () {
       const addres1Balance = await hardhatToken.balanceOf(address1.address)
       expect(addres1Balance).to.equal(5)
     })
+    it("Should fail if transfer is called with empty account", async function () {
+      await expect(
+        hardhatToken.connect(address1).transfer(address2.address, 10)
+      ).to.be.revertedWith("Not Enough Balance")
+    })
   })
 })
